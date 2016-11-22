@@ -1,0 +1,40 @@
+a Linux Dustbin (Recycle-bin) for command line use
+
+How it works:
+1. when 'rm' file/dir, it is moved to a Dustbin dir (default: $HOME/_DUSTBIN) other than do real delete; use 'RM' for real delete (the original Linux rm)
+2. in Dustbin dir, "removed" files/dirs are orangized as:
+  <Dustbin_dir>/<date_of_delete>/<deleted files or dirs>;
+  The <deleted files or dirs> are renamed as <datetime_of_delete>_<original_name>, so that same file/dir that deleted at different time will not be overwritten.
+3. use 'cddust' to go to Dustbin dir; use 'cddust_today' to go to Dustbin/<date_of_today>
+4. cd Dustbin dir, use 'recover' to recover specified file/dir. 
+5. use 'clrdust' to clear the Dustbin-dir (do real deletion for all files in your Dustbin Dir)
+
+When it cannot work:
+1. can't process the file/dir with Space-key (i.e. " ") in their name or their path. 
+2. If multiple files/dirs with same name are deleted at the same time, some errors may be caused.
+
+How to install:
+1. download this directory, put it somewhere (e.g. in ~/script/)
+2. set environment variable & alias as follows:
+ a. If you are working on BASH, copy these lines in your ~/.bashrc
+## on Dustbin
+export DIR_DUSTBIN=$HOME/_DUSTBIN #where the dustbin-dir is
+export DIR_DUSTBIN_SH=$HOME/script/Dustbin #where the script is
+alias RM=/bin/rm
+alias rm="$DIR_DUSTBIN_SH/mv_to_dustbin.sh"
+alias recover="$DIR_DUSTBIN_SH/recover_dust.sh"
+alias cddust="cd $DIR_DUSTBIN"
+alias cddust_today=". $DIR_DUSTBIN_SH/cddust_today.sh"
+alias clrdust="/bin/rm -rf $DIR_DUSTBIN/*"
+
+ b. If you are working on CSH, copy these lines in your ~/.cshrc
+# on Dustbin
+setenv DIR_DUSTBIN $SCRATCH/_DUSTBIN
+setenv DIR_DUSTBIN_SH $HOME/script/Dustbin
+alias RM /bin/rm
+alias rm "$DIR_DUSTBIN_SH/mv_to_dustbin.sh"
+alias recover "$DIR_DUSTBIN_SH/recover_dust.sh"
+alias cddust "cd $DIR_DUSTBIN"
+alias cddust_today "source $DIR_DUSTBIN_SH/cddust_today.csh"
+alias clrdust "/bin/rm -rf $DIR_DUSTBIN/*"
+
