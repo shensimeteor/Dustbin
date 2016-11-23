@@ -29,7 +29,7 @@ alias clrdust="/bin/rm -rf $DIR_DUSTBIN/*"
 
  b. If you are working on CSH, copy these lines in your ~/.cshrc
 # on Dustbin
-setenv DIR_DUSTBIN $SCRATCH/_DUSTBIN
+setenv DIR_DUSTBIN $HOME/_DUSTBIN
 setenv DIR_DUSTBIN_SH $HOME/script/Dustbin
 alias RM /bin/rm
 alias rm "$DIR_DUSTBIN_SH/mv_to_dustbin.sh"
