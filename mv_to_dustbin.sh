@@ -67,12 +67,14 @@ else
         obj_name=$(basename "$obj")
         obj_print=$(reblank "$obj")
         dest=$DIR_DUSTBIN/$date/$file_prefix"$obj_name"
-        echo -ne "\033[1;34m"
-        echo "MVing $obj_print to DUSTBIN: $(reblank "$dest")---"
-        echo -ne "\033[0m"
         mv "$obj" "$dest"
-        abs_path=$(abspath "$obj")
-        echo "$(reblank "$abs_path") $(reblank "$dest")" >> $DIR_DUSTBIN/dust_log
+        if [ $? -eq 0 ]; then
+            echo -ne "\033[1;34m"
+            echo "MVing $obj_print to DUSTBIN: $(reblank "$dest")---"
+            echo -ne "\033[0m"
+            abs_path=$(abspath "$obj")
+            echo "$(reblank "$abs_path") $(reblank "$dest")" >> $DIR_DUSTBIN/dust_log
+        fi
     done
 fi
 
